@@ -1,0 +1,54 @@
+@use './variables' as vars;
+@use 'sass:map';
+
+// Función para obtener un color del mapa
+@function color($theme, $key) {
+  @return map.get(map.get(vars.$colors, $theme), $key);
+}
+
+// Mixin para aplicar tamaño de fuente
+@mixin font-size($size-key) {
+  font-size: map.get(vars.$font-sizes, $size-key);
+}
+
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+  }  
+
+// Mixins de Flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+@mixin container {
+    margin: 0 15px; // Margin 15px para pantallas pequeñas
+  
+    // A partir de 1200px, el margen se vuelve automático en los laterales
+    @media (min-width: 1200px) {
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+  }

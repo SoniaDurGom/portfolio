@@ -1,0 +1,49 @@
+
+  // Font sizes map (in rem)
+  $font-sizes: (
+    xxs: 0.625rem,  // 10px
+    xs:  0.75rem,   // 12px
+    s:  0.875rem,  // 14px
+    m:  1rem,      // 16px
+    l:  1.125rem,  // 18px
+    xl:  1.25rem,   // 20px
+    xxl: 1.5rem,     // 24px
+    xl3: 2rem,     
+  );
+
+//Fonts
+$font-body: 'Open Sans', sans-serif;
+$font-title: 'Pacifico', cursive;
+
+
+// Breakpoints map
+$breakpoints: (
+  mobile: 480px,
+  tablet: 768px,
+  desktop: 1024px,
+  large-desktop: 1200px
+);
+
+// Color palette map
+$colors: (
+  light: (
+    primary: #00adb5,
+    link: #00dee8,
+    hover: #007c82,
+    text: #0a0a0a,
+    background: #fff9f3
+  ),
+  dark: (
+    primary: #008c8f,
+    link: #00a8b8,
+    hover: #005c5e,
+    text: #e0e0e0,
+    background: #121212,
+    extra-dark-background: #1a1a1a 
+  ),
+  extra: (
+    dark-background: #1a1a1a,
+    white: #ffff,
+    gray: #fafafa
+  )
+);

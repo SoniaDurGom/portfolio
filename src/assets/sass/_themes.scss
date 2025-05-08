@@ -1,0 +1,17 @@
+@use 'variables' as vars;
+@use 'mixins' as *;
+@use 'sass:map';
+
+body.noche {
+  background-color: color(dark, background);
+  color: color(dark, text);
+}
+
+body.noche .card {
+  background-color: color(dark, extra-dark-background);
+  color: color(dark, text);
+}
+
+body.noche section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
