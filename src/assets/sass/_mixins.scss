@@ -45,7 +45,7 @@
 
 @mixin container {
     margin: 0 15px; // Margin 15px para pantallas pequeñas
-  
+
     // A partir de 1200px, el margen se vuelve automático en los laterales
     @media (min-width: 1200px) {
         max-width: 1180px;

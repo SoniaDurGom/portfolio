@@ -6,4 +6,100 @@
 @use 'components';
 @use 'sections'; 
 @use 'carousel';
+@use 'sass:map';
 @import 'swiper/swiper-bundle.css';
+
+
+  
+  .drag-container {
+    width: 100%;
+    min-height: 950px;
+    position: relative;
+    overflow: visible;
+
+    @media (max-width: map.get(vars.$breakpoints, desktop)) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  }
+  
+  .draggable {
+    width: 100%;
+    max-width: 800px;
+    height: fit-content;
+
+   
+
+    @media (min-width: map.get(vars.$breakpoints, desktop)) {
+        width: 45%;
+        cursor: grab;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        user-select: none;
+        z-index: 4;
+    }
+
+  
+  }
+
+
+.experiencia {
+  top: 10px;
+  left: 0;
+}
+
+.educacion {
+    top: 350px;
+    left: 98%;
+}
+
+.certificaciones {
+  top: 550px;
+  left: 0;
+}
+
+.reconocimientos {
+    top: 670px;
+    left: 98%;
+  }
+
+
+@media (max-width: map.get(vars.$breakpoints, desktop))  {
+    .experiencia,
+    .educacion,
+    .reconocimientos,
+    .certificaciones {
+        transform: translate(0%, 0%) !important;
+    }
+
+}
+
+
+
+@media (min-width: map.get(vars.$breakpoints, desktop)) {
+    .experiencia,
+    .educacion,
+    .reconocimientos,
+    .certificaciones {
+        position: absolute;
+    }
+  
+    .experiencia {
+    transform: translate(0, 0%);
+  }
+
+  .educacion {
+    transform: translate(-100%, -50%);
+  }
+
+  .reconocimientos {
+    transform: translate(-100%, 0);
+  }
+
+  .certificaciones {
+    transform: translate(0, -50%);
+  }
+}
+  

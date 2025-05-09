@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         1024: { slidesPerView: 3 },
       },
       autoplay: {
-        delay: 6000, // Tiempo en ms entre cada cambio de diapositiva
-        disableOnInteraction: false, // No desactivar el autoplay si el usuario interactúa
+        delay: 6000, 
+        disableOnInteraction: false, 
       },
     });
   });
@@ -46,3 +46,59 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('noche');
   });
   
+
+
+
+  //!Prueba GSAP
+  import { gsap } from 'gsap';
+  import { Draggable } from 'gsap/Draggable';
+  
+  gsap.registerPlugin(Draggable);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      gsap.from('.experiencia', {
+          opacity: 0,
+          x: -200, 
+          duration: 1,
+          ease: 'power3.out'
+      });
+  
+      gsap.from('.educacion', {
+          opacity: 0,
+          x: 200, 
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.5 
+      });
+
+      gsap.from('.certificaciones', {
+        opacity: 0,
+        x: -200, 
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.5 
+    });
+
+    gsap.from('.reconocimientos', {
+        opacity: 0,
+        x: -200, 
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.5 
+    });
+  
+      // Arrastrables
+      if (window.innerWidth >= 1024) {
+          Draggable.create('.draggable', {
+              bounds: '.drag-container',
+              inertia: true,
+              onDrag: function() {
+                
+                  this.target.style.zIndex = 4;  
+              },
+              onRelease: function() {
+                  this.target.style.zIndex = '';  
+              }
+          });
+      }
+  });

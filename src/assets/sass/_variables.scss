@@ -31,7 +31,8 @@ $colors: (
     link: #00dee8,
     hover: #007c82,
     text: #0a0a0a,
-    background: #fff9f3
+    background: #f9f9f9
+
   ),
   dark: (
     primary: #008c8f,
@@ -41,9 +42,10 @@ $colors: (
     background: #121212,
     extra-dark-background: #1a1a1a 
   ),
-  extra: (
+  extra-colors: (
     dark-background: #1a1a1a,
-    white: #ffff,
+    warm-background: #fff9f3,
+    white-100: #ffff,
     gray: #fafafa
   )
 );

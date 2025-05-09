@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    background-color: color(light, background);
+    background-color: color(extra-colors, white-100);
     color: color(light, text);
     font-family: vars.$font-body;  // Usamos la variable correctamente referenciada
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -50,30 +50,53 @@ button.noche {
   }
 }
 
-
+img{
+    width: 100%;
+    height: 100%;
+}
 
 .cards-container {
   @include flex-row;  
-  @include container;
+ 
+  margin: 15px;
 
-  // Estilo para las tarjetas dentro de .cards-container (si se quieren más específicas)
+  // Estilo para las tarjetas dentro de .cards-container
   .card {
     @include flex(column, flex-start, flex-start);
-    background-color: color(extra, white);  // Fondo blanco por defecto
+    background-color: color(extra-colors, white-100); 
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    width: 100%;
 
     &:hover {
       transform: scale(1.03);
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
+    &_info{
+        width: 100%;
+    }
+
+
+    h2,h3,h4,h5{
+        margin: 0 0 16px !important;
+    }
+  
+    .technologies{
+        gap: 15px 20px;
+
+        .tech-item{
+            width: fit-content;
+        }
+    }
+
+
     // Modo noche
     body.noche & {
-      background-color: color(dark, extra-dark-background); // Fondo oscuro en modo nocturno
+      background-color: color(dark, extra-dark-background); 
       color: color(dark, text);
     }
   }
@@ -83,9 +106,8 @@ button.noche {
 
 .container {
     @include container;
-  }
+}
 
-  // Suponiendo que ya tienes los mixins y variables importados
 .footer {
     @include flex-center;
     justify-content: center;
@@ -96,7 +118,7 @@ button.noche {
   
     a {
       color: white;
-      font-size: 1.2rem;
+      font-size: map.get(vars.$font-sizes, xl);
       transition: transform 0.3s ease;
   
       &:hover {
@@ -109,14 +131,14 @@ button.noche {
     }
   }
   
-  // Botón ancla flotante
+    //Ancla Flotante
   .scroll-top {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
     background-color: color(light, link);
     color: white;
-    font-size: 1.5rem;
+    font-size: map.get(vars.$font-sizes, xxl);
     border-radius: 50%;
     padding: 0.6rem 1rem;
     text-decoration: none;
@@ -139,11 +161,11 @@ button.noche {
   
 
   .swiper {
-    height: 500px;  // o usa 100vh si quieres que ocupe toda la altura de la ventana
+    height: 500px; 
   }
   
   .swiper-slide {
-    height: auto;  // o 100% si deseas que ocupe toda la altura del contenedor
+    height: auto;  
   }
 
 
@@ -166,7 +188,7 @@ button.noche {
         a.proyecto-card {
           @include flex(column, flex-start, center);
           text-decoration: none;
-          background-color: color(extra, white);
+          background-color: color(extra-colors, white-100);
           border-radius: 1rem;
           overflow: hidden;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -217,7 +239,7 @@ button.noche {
   
     h2 {
       font-family: vars.$font-title;
-      font-size: 2rem;
+      font-size: map.get(vars.$font-sizes, xl3);
       margin-bottom: 1.5rem;
       color: color(light, primary);
   
@@ -227,7 +249,7 @@ button.noche {
     }
   
     h3 {
-      font-size: 1.3rem;
+      font-size: map.get(vars.$font-sizes, xl);
       margin: 1rem 0 0.5rem;
       color: color(light, text);
   
@@ -237,7 +259,7 @@ button.noche {
     }
   
     p {
-      font-size: 1rem;
+        font-size: map.get(vars.$font-sizes, m);
       line-height: 1.6;
       margin-bottom: 1rem;
       color: color(light, text);
