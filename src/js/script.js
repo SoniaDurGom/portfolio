@@ -49,56 +49,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  //!Prueba GSAP
-  import { gsap } from 'gsap';
-  import { Draggable } from 'gsap/Draggable';
-  
-  gsap.registerPlugin(Draggable);
-  
-  document.addEventListener('DOMContentLoaded', () => {
-      gsap.from('.experiencia', {
-          opacity: 0,
-          x: -200, 
-          duration: 1,
-          ease: 'power3.out'
-      });
-  
-      gsap.from('.educacion', {
-          opacity: 0,
-          x: 200, 
-          duration: 1,
-          ease: 'power3.out',
-          delay: 0.5 
-      });
+//!Prueba GSAP
+import { gsap } from 'gsap';
+import { Draggable } from 'gsap/Draggable';
 
-      gsap.from('.certificaciones', {
-        opacity: 0,
-        x: -200, 
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.5 
-    });
+gsap.registerPlugin(Draggable);
 
-    gsap.from('.reconocimientos', {
-        opacity: 0,
-        x: -200, 
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.5 
-    });
-  
-      // Arrastrables
-      if (window.innerWidth >= 1024) {
-          Draggable.create('.draggable', {
-              bounds: '.drag-container',
-              inertia: true,
-              onDrag: function() {
-                
-                  this.target.style.zIndex = 4;  
-              },
-              onRelease: function() {
-                  this.target.style.zIndex = '';  
-              }
-          });
-      }
+let draggableInstances = [];
+
+function createDraggables() {
+  draggableInstances = Draggable.create('.draggable', {
+    bounds: '.drag-container',
+    inertia: true,
+    onDrag: function () {
+      this.target.style.zIndex = 4;
+    },
+    onRelease: function () {
+      this.target.style.zIndex = '';
+    }
   });
+}
+
+function killDraggables() {
+  draggableInstances.forEach(instance => instance.kill());
+  draggableInstances = [];
+}
+
+function handleResize() {
+  const shouldBeDraggable = window.innerWidth >= 768;
+
+  if (shouldBeDraggable && draggableInstances.length === 0) {
+    createDraggables();
+  } else if (!shouldBeDraggable && draggableInstances.length > 0) {
+    killDraggables();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Animaciones de entrada
+  gsap.from('.experiencia', {
+    opacity: 0,
+    x: -200,
+    duration: 1,
+    ease: 'power3.out'
+  });
+
+  gsap.from('.educacion', {
+    opacity: 0,
+    x: 200,
+    duration: 1,
+    ease: 'power3.out',
+    delay: 0.5
+  });
+
+  gsap.from('.certificaciones', {
+    opacity: 0,
+    x: -200,
+    duration: 1,
+    ease: 'power3.out',
+    delay: 0.5
+  });
+
+  gsap.from('.reconocimientos', {
+    opacity: 0,
+    x: -200,
+    duration: 1,
+    ease: 'power3.out',
+    delay: 0.5
+  });
+
+  // Inicializar según tamaño
+  handleResize();
+  window.addEventListener('resize', handleResize);
+});
