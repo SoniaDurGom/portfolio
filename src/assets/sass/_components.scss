@@ -48,11 +48,16 @@ button {
       background-color: color(dark, hover);
     }
   }
+
+  @media (min-width: map.get(vars.$breakpoints, tablet))  {
+
+  }
 }
 
 //Dark/Light mode
 .mode-switch {
     position: relative;
+    padding-left: 8px;
   
     .checkbox {
       opacity: 0;
@@ -100,6 +105,10 @@ button {
 
 //Proyectos
 .proyectos {
+    padding: 0;
+    border: 0;
+    margin-bottom: 4rem;
+
     h2 {
       text-align: center;
       margin-bottom: 2rem;
@@ -120,7 +129,7 @@ button {
           border-radius: 1rem;
           overflow: hidden;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          width: 260px;
+          width: 80%;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
   
           &:hover {
@@ -149,6 +158,23 @@ button {
           }
         }
       }
+
+      @media (max-width: map.get(vars.$breakpoints, mobile))  {
+        .swiper-button-prev,
+        .swiper-button-next {
+          display: none;
+        }
+      }
+
+     .swiper-button-prev {
+        left: 0;
+      }
+  
+      .swiper-button-next {
+        right: 0;
+      }
+      
+
     }
   }
   
@@ -225,6 +251,11 @@ button {
     > div{
         @include flex($direction: row);
         gap: 12px;
+        padding-right: 65px;
+    }
+
+    i {
+      padding-left: 8px;
     }
 }
 

@@ -14,8 +14,11 @@ header {
 }
 
 .header-nav {
-    @include flex($justify: space-between, $align: center);
-    padding: 1rem 2rem;
+    @include flex($justify: space-between, $align: center, $wrap:wrap);
+    
+    @media (min-width: map.get(vars.$breakpoints, tablet))  {
+      padding: 1rem 2rem;
+    }
   
     h1 {
       font-family: vars.$font-title;
