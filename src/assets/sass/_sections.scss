@@ -70,34 +70,3 @@ section {
 }
 
 
-.feedback{
-    margin: 0;
-    background-color: color(extra-colors, warm-background);
-    border: 0;
-
-    i{
-        color: color(dark, primary);
-        font-size: 4rem
-    }
-
-    &_msg{
-        margin-bottom: 4rem;
-    }
-
-    &_name{
-        text-align: end;
-        position: relative;
-
-        i{
-            position: absolute;
-            top: 0;
-            right: 0;
-            transform: translateY(-100%);
-        }
-    }
-
-    body.noche & {
-        background-color: color(extra-colors, dark-background);
-    }
-
-}

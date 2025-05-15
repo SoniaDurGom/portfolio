@@ -60,7 +60,7 @@ img{
  
   margin: 15px;
 
-  // Estilo para las tarjetas dentro de .cards-container
+  // Estilo para las tarjetas dentro de .cards-container - (swiper o sueltas)
   .card {
     @include flex(column, flex-start, flex-start);
     background-color: color(extra-colors, white-100); 
