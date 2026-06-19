@@ -1,51 +1,59 @@
+$font-sizes: (
+  xxs: 0.625rem,
+  xs: 0.75rem,
+  s: 0.875rem,
+  m: 1rem,
+  l: 1.125rem,
+  xl: 1.25rem,
+  xxl: 1.5rem,
+  xl3: 2rem,
+  xl4: clamp(2rem, 4vw, 3rem),
+);
 
-  // Font sizes map (in rem)
-  $font-sizes: (
-    xxs: 0.625rem,  // 10px
-    xs:  0.75rem,   // 12px
-    s:  0.875rem,  // 14px
-    m:  1rem,      // 16px
-    l:  1.125rem,  // 18px
-    xl:  1.25rem,   // 20px
-    xxl: 1.5rem,     // 24px
-    xl3: 2rem,     
-  );
+$font-body: 'Inter', system-ui, sans-serif;
 
-//Fonts
-$font-body: 'Open Sans', sans-serif;
-$font-title: 'Pacifico', cursive;
-
-
-// Breakpoints map
 $breakpoints: (
   mobile: 480px,
   tablet: 768px,
   desktop: 1024px,
-  large-desktop: 1200px
+  large-desktop: 1200px,
 );
 
-// Color palette map
 $colors: (
   light: (
-    primary: #00adb5,
-    link: #00dee8,
-    hover: #007c82,
-    text: #0a0a0a,
-    background: #f9f9f9
-
+    primary: #00838f,
+    primary-dark: #00656d,
+    accent: #00acc1,
+    link: #00656d,
+    hover: #004d54,
+    text: #1a1a2e,
+    text-muted: #3f3f50,
+    background: #f8fafb,
+    surface: #ffffff,
+    border: #c5cad3,
   ),
   dark: (
-    primary: #008c8f,
-    link: #00a8b8,
-    hover: #005c5e,
-    text: #e0e0e0,
-    background: #121212,
-    extra-dark-background: #1a1a1a 
+    primary: #26c6da,
+    primary-dark: #00acc1,
+    accent: #4dd0e1,
+    link: #80deea,
+    hover: #b2ebf2,
+    text: #e8eaed,
+    text-muted: #c2c6ce,
+    background: #0f1419,
+    surface: #1a2332,
+    border: #2d3748,
   ),
   extra-colors: (
-    dark-background: #1a1a1a,
-    warm-background: #fff9f3,
-    white-100: #ffff,
-    gray: #fafafa
-  )
+    white-100: #ffffff,
+    gradient-start: #00838f,
+    gradient-end: #006064,
+  ),
 );
+
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+$header-height: 64px;

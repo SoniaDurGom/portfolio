@@ -12,12 +12,12 @@
 }
 
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
-    align-items: $align;
-    flex-wrap: $wrap;
-  }  
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
 
 // Mixins de Flexbox
 @mixin flex-center {
@@ -38,17 +38,40 @@
 }
 
 @mixin flex-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 @mixin container {
-    margin: 0 15px; // Margin 15px para pantallas pequeñas
+  margin: 0 15px;
 
-    // A partir de 1200px, el margen se vuelve automático en los laterales
-    @media (min-width: 1200px) {
-        max-width: 1180px;
-        margin: 0 auto;
-    }
+  @media (min-width: 1200px) {
+    max-width: 1180px;
+    margin: 0 auto;
   }
+}
+
+// Mixins de box-hadows
+@mixin box-shadow-smooth {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@mixin box-shadow-hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+// Mixins de botones
+@mixin button-style($theme: light) {
+  background-color: color($theme, link);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: color($theme, hover);
+  }
+}

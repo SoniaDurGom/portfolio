@@ -2,42 +2,75 @@
 @use 'mixins' as *;
 @use 'sass:map';
 
-.swiper {
-  width: 100%;
-  height: 500px;
-  padding: 2rem 0;
+.testimonials-swiper {
+  --swiper-navigation-size: 28px;
+  position: relative;
+  padding: 0 2.75rem 3.25rem;
 
-  .swiper-wrapper {
-    padding-bottom: 2rem;
-  }
-
-  .swiper-slide {
-    width: auto;
-    height: auto;
-    margin-right: 1rem;
+  @media (min-width: map.get(vars.$breakpoints, tablet)) {
+    padding-left: 3.25rem;
+    padding-right: 3.25rem;
   }
 
   .swiper-button-prev,
   .swiper-button-next {
-    color: color(light, primary);
+    color: color(light, primary-dark);
+    top: 50%;
+    margin-top: -1.75rem;
 
     body.noche & {
       color: color(dark, primary);
     }
+
+    &::after {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: map.get(vars.$breakpoints, mobile)) {
+      display: none;
+    }
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-pagination {
+    bottom: 0;
+  }
+
+  .swiper-pagination-bullet {
+    background: color(light, border);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px !important;
+
+    body.noche & {
+      background: color(dark, border);
+    }
   }
 
   .swiper-pagination-bullet-active {
-    background: color(light, primary);
+    background: color(light, primary-dark);
 
     body.noche & {
       background: color(dark, primary);
     }
   }
+
+  .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .swiper-slide {
+    display: flex;
+    height: auto;
+    box-sizing: border-box;
+  }
 }
-
-
-
-
-
-
-

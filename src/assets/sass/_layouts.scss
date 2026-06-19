@@ -2,54 +2,207 @@
 @use 'mixins' as *;
 @use 'sass:map';
 
-header {
-  background-color: color(light, primary);
-  color: white;
-  padding: 1rem;
-  text-align: center;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid color(light, border);
+  height: vars.$header-height;
 
-  &.noche {
-    background-color: color(dark, primary);
+  body.noche & {
+    background: rgba(15, 20, 25, 0.92);
+    border-bottom-color: color(dark, border);
   }
 }
 
-.header-nav {
-    @include flex($justify: space-between, $align: center, $wrap:wrap);
-    
-    @media (min-width: map.get(vars.$breakpoints, tablet))  {
-      padding: 1rem 2rem;
+.site-nav {
+  @include flex($justify: space-between, $align: center);
+  height: vars.$header-height;
+  gap: 1rem;
+
+  &__brand {
+    font-weight: 700;
+    font-size: map.get(vars.$font-sizes, l);
+    color: color(light, primary-dark);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.25rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+
+    &:focus-visible {
+      outline: 3px solid color(light, primary-dark);
+      outline-offset: 2px;
     }
-  
-    h1 {
-      font-family: vars.$font-title;
-      font-size: map.get(vars.$font-sizes, xl3);
+
+    body.noche & {
+      color: color(dark, primary);
+
+      &:focus-visible {
+        outline-color: color(dark, primary);
+      }
     }
   }
-  
+
+  &__menu {
+    @include flex($align: center);
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      min-height: 44px;
+      text-decoration: none;
+      color: color(light, text);
+      font-size: map.get(vars.$font-sizes, s);
+      font-weight: 500;
+      border-radius: vars.$radius-sm;
+      transition: background 0.2s, color 0.2s;
+
+      &:hover,
+      &.is-active {
+        background: rgba(0, 101, 109, 0.12);
+        color: color(light, primary-dark);
+      }
+
+      &:focus-visible {
+        outline: 3px solid color(light, primary-dark);
+        outline-offset: 2px;
+      }
+
+      body.noche & {
+        color: color(dark, text);
+
+        &:hover,
+        &.is-active {
+          background: rgba(38, 198, 218, 0.15);
+          color: color(dark, primary);
+        }
+
+        &:focus-visible {
+          outline-color: color(dark, primary);
+        }
+      }
+    }
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: color(light, text);
+      transition: transform 0.3s, opacity 0.3s;
+
+      body.noche & {
+        background: color(dark, text);
+      }
+    }
+
+    &[aria-expanded='true'] {
+      span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  }
+
+  @media (max-width: map.get(vars.$breakpoints, tablet)) {
+    &__toggle {
+      display: flex;
+      order: 3;
+    }
+
+    &__menu {
+      position: absolute;
+      top: vars.$header-height;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: color(light, surface);
+      border-bottom: 1px solid color(light, border);
+      padding: 0.5rem;
+      display: none;
+
+      &.is-open {
+        display: flex;
+      }
+
+      body.noche & {
+        background: color(dark, surface);
+        border-bottom-color: color(dark, border);
+      }
+    }
+
+    .mode-switch {
+      margin-left: auto;
+    }
+  }
+}
 
 .footer {
   @include flex-center;
-  justify-content: center;
   gap: 2rem;
-  padding: 1rem;
-  background-color: color(light, primary);
+  padding: 1.25rem;
+  background: color(light, primary-dark);
   color: white;
 
   a {
     color: white;
     font-size: map.get(vars.$font-sizes, xl);
-    transition: transform 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    @include flex-center;
+    transition: transform 0.2s ease, background 0.2s;
+    border-radius: vars.$radius-sm;
 
     &:hover {
-      transform: scale(1.2);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    &:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 2px;
     }
   }
 
-  &.noche {
-    background-color: color(dark, primary);
-  }
-}
+  body.noche & {
+    background: color(dark, surface);
 
-.container {
-  @include container;
+    a {
+      color: color(dark, text);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      &:focus-visible {
+        outline-color: color(dark, primary);
+      }
+    }
+  }
 }
