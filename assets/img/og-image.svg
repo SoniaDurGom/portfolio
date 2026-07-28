@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Sonia Durán Gómez  Web Developer">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004d54"/>
+      <stop offset="100%" stop-color="#00656d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="96" y="280" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="88" font-weight="700" letter-spacing="0.08em">SDG</text>
+  <text x="96" y="360" fill="#b2ebf2" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="600">Sonia Durán Gómez</text>
+  <text x="96" y="430" fill="#e0f7fa" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="400">Web Developer · CMS &amp; E-commerce</text>
+  <text x="96" y="520" fill="#80deea" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="400">WordPress · PrestaShop · Frontend</text>
+</svg>
