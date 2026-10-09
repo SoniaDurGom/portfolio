@@ -17,8 +17,19 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
           test: /\.scss$/i,
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        },
+        {
+          test: /\.(woff2?|ttf|eot)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/fonts/[name][ext]',
+          },
         },
       ],
     },
@@ -32,7 +43,19 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin({
         patterns: [
           { from: 'src/assets/img/favicon.ico', to: 'assets/img/favicon.ico', noErrorOnMissing: true },
-          { from: 'src/assets/pdf', to: 'assets/pdf', noErrorOnMissing: true },
+          { from: 'src/assets/img/og-image.svg', to: 'assets/img/og-image.svg', noErrorOnMissing: true },
+          {
+            from: 'src/assets/pdf/SoniaDuranGomez_CV_Frontend_2026.pdf',
+            to: 'assets/pdf/SoniaDuranGomez_CV_Frontend_2026.pdf',
+            noErrorOnMissing: true,
+          },
+          {
+            from: 'src/assets/pdf/C1-Pearson.pdf',
+            to: 'assets/pdf/C1-Pearson.pdf',
+            noErrorOnMissing: true,
+          },
+          { from: 'public/robots.txt', to: 'robots.txt', noErrorOnMissing: true },
+          { from: 'public/sitemap.xml', to: 'sitemap.xml', noErrorOnMissing: true },
         ],
       }),
     ],

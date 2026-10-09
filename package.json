@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist -b gh-pages -r https://github.com/SoniaDurGom/portfolio.git",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:i18n": "node scripts/validate-i18n.mjs",
+    "test": "npm run test:i18n"
   },
   "keywords": [],
   "author": "Sonia Durán Gómez",

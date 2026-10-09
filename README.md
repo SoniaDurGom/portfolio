@@ -5,7 +5,7 @@ Portfolio público de **Sonia Durán Gómez**, desarrolladora web frontend espec
 ## Enfoque
 
 - Versión **pública y anonimizada**: casos de estudio sin nombres de clientes.
-- CTA para solicitar acceso al **portfolio ampliado** con referencias detalladas.
+- Idiomas **ES / EN** con detección del navegador y preferencia guardada.
 - Orientado a oportunidades **Junior Frontend** y **prácticas Full Stack** en España.
 
 ## Stack del proyecto
@@ -20,8 +20,23 @@ Portfolio público de **Sonia Durán Gómez**, desarrolladora web frontend espec
 npm install
 npm start          # desarrollo local
 npm run build      # producción → /dist
+npm run test:i18n  # valida paridad de claves es.js / en.js
+npm test           # alias de test:i18n
 npm run deploy     # build + publicación en rama gh-pages (GitHub Pages)
 ```
+
+## Internacionalización (i18n)
+
+| Archivo | Descripción |
+|---------|-------------|
+| `src/js/i18n/es.js` | Textos en español |
+| `src/js/i18n/en.js` | Textos en inglés |
+| `src/js/i18n/index.js` | Lógica de cambio de idioma |
+
+- Atributos en HTML: `data-i18n`, `data-i18n-html`, `data-i18n-aria`, `data-case-id`, `data-exp-id`, `data-testimonial`.
+- Casos de estudio: claves `cases.c1` … `cases.c13` con campos `li1`, `li2`, etc.
+- URL con idioma: `?lang=es` o `?lang=en`.
+- Tras añadir claves nuevas, ejecutar `npm run test:i18n` para comprobar que `es.js` y `en.js` coinciden.
 
 ## Ramas
 

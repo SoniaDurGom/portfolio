@@ -1,7 +1,16 @@
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+import '@fortawesome/fontawesome-free/css/brands.min.css';
+import '@fortawesome/fontawesome-free/css/regular.min.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import '../assets/sass/main.scss';
-import Swiper from 'swiper/bundle';
+import Swiper from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { initI18n, getHeroStrings, markHeroAnimationDone, t } from './i18n';
 
 gsap.registerPlugin(TextPlugin);
 
@@ -11,16 +20,17 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 function initDarkMode() {
   const checkbox = document.getElementById('checkbox');
   const body = document.body;
+  const stored = localStorage.getItem('mode');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'noche' || (stored !== 'dia' && prefersDark);
 
-  if (localStorage.getItem('mode') === 'noche') {
-    body.classList.add('noche');
-    if (checkbox) checkbox.checked = true;
-  }
+  body.classList.toggle('noche', isDark);
+  if (checkbox) checkbox.checked = isDark;
 
   checkbox?.addEventListener('change', () => {
-    const isDark = checkbox.checked;
-    body.classList.toggle('noche', isDark);
-    localStorage.setItem('mode', isDark ? 'noche' : 'dia');
+    const nextDark = checkbox.checked;
+    body.classList.toggle('noche', nextDark);
+    localStorage.setItem('mode', nextDark ? 'noche' : 'dia');
   });
 }
 
@@ -32,17 +42,20 @@ function initHeroAnimation() {
 
   if (!nameEl || !roleEl) return;
 
-  const fullName = 'Sonia Durán Gómez';
-  const fullRole = 'Desarrolladora Web · CMS & E-commerce';
+  const { name: fullName, role: fullRole } = getHeroStrings();
 
   if (prefersReducedMotion) {
     nameEl.textContent = fullName;
     roleEl.textContent = fullRole;
     cursorEl?.classList.add('is-hidden');
+    markHeroAnimationDone();
     return;
   }
 
-  const tl = gsap.timeline({ defaults: { ease: 'none' } });
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    onComplete: markHeroAnimationDone,
+  });
 
   tl.to(nameEl, {
     duration: 1.8,
@@ -55,6 +68,12 @@ function initHeroAnimation() {
     });
 }
 
+function closeMobileMenu(toggle, menu) {
+  toggle?.setAttribute('aria-expanded', 'false');
+  toggle?.setAttribute('aria-label', t('nav.openMenu'));
+  menu?.classList.remove('is-open');
+}
+
 // ─── Navigation ──────────────────────────────────────────────
 function initNavigation() {
   const toggle = document.querySelector('.site-nav__toggle');
@@ -65,13 +84,13 @@ function initNavigation() {
   toggle?.addEventListener('click', () => {
     const isOpen = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', t(isOpen ? 'nav.openMenu' : 'nav.closeMenu'));
     menu?.classList.toggle('is-open', !isOpen);
   });
 
   links.forEach((link) => {
     link.addEventListener('click', () => {
-      toggle?.setAttribute('aria-expanded', 'false');
-      menu?.classList.remove('is-open');
+      closeMobileMenu(toggle, menu);
     });
   });
 
@@ -112,8 +131,14 @@ function initCaseStudies() {
   cases.forEach((caseEl) => {
     const trigger = caseEl.querySelector('.case__trigger');
     const panel = caseEl.querySelector('.case__panel');
+    const caseId = caseEl.getAttribute('data-case-id');
 
     if (!trigger || !panel) return;
+
+    if (caseId) {
+      panel.id = `case-panel-${caseId}`;
+      trigger.setAttribute('aria-controls', panel.id);
+    }
 
     trigger.addEventListener('click', () => {
       const isOpen = caseEl.classList.contains('is-open');
@@ -190,6 +215,7 @@ function initTestimonials() {
   if (!el) return;
 
   const swiper = new Swiper('.testimonials-swiper', {
+    modules: [Navigation, Pagination, Autoplay],
     slidesPerView: 1,
     spaceBetween: 24,
     loop: true,
@@ -221,6 +247,10 @@ function initTestimonials() {
     { passive: true }
   );
 
+  document.addEventListener('languagechange', () => {
+    equalizeTestimonialHeights(el);
+  });
+
   return swiper;
 }
 
@@ -228,7 +258,7 @@ function initTestimonials() {
 function initScrollReveal() {
   if (prefersReducedMotion) return;
 
-  const targets = document.querySelectorAll('.section, .private-cta, .contact-sticky, .hero__actions, .hero__tags');
+  const targets = document.querySelectorAll('.section, .contact-sticky, .hero__actions, .hero__tags');
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
@@ -254,6 +284,7 @@ function initScrollReveal() {
 
 // ─── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initI18n();
   initDarkMode();
   initHeroAnimation();
   initNavigation();

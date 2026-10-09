@@ -146,11 +146,117 @@
   }
 }
 
+// Language selector (typographic + globe)
+.lang-switch {
+  @include flex($align: center);
+  flex-shrink: 0;
+  gap: 0.4rem;
+
+  &__icon {
+    font-size: map.get(vars.$font-sizes, s);
+    color: color(light, primary-dark);
+    line-height: 1;
+  }
+
+  &__options {
+    @include flex($align: center);
+    gap: 0.1rem;
+  }
+
+  &__sep {
+    color: color(light, text-muted);
+    font-size: map.get(vars.$font-sizes, xs);
+    font-weight: 400;
+    user-select: none;
+    line-height: 1;
+  }
+
+  &__btn {
+    position: relative;
+    min-width: 30px;
+    min-height: 44px;
+    padding: 0.35rem 0.25rem;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: map.get(vars.$font-sizes, xs);
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    color: color(light, text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0.2rem;
+      right: 0.2rem;
+      bottom: 0.65rem;
+      height: 2px;
+      border-radius: 1px;
+      background: color(light, accent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.22s ease;
+    }
+
+    &:hover:not(.is-active) {
+      color: color(light, primary-dark);
+    }
+
+    &.is-active {
+      color: color(light, primary-dark);
+      font-weight: 700;
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid color(light, primary-dark);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  body.noche & {
+    .lang-switch__icon {
+      color: color(dark, primary);
+    }
+
+    .lang-switch__sep {
+      color: color(dark, text-muted);
+    }
+
+    .lang-switch__btn {
+      color: color(dark, text-muted);
+
+      &::after {
+        background: color(dark, primary);
+      }
+
+      &:hover:not(.is-active) {
+        color: color(dark, primary);
+      }
+
+      &.is-active {
+        color: color(dark, primary);
+      }
+
+      &:focus-visible {
+        outline-color: color(dark, primary);
+      }
+    }
+  }
+}
+
 .scroll-top {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 1rem;
   right: 1.25rem;
-  background: color(light, primary-dark);
+  background: rgba(255, 255, 255, 0.18);
   color: white;
   font-size: map.get(vars.$font-sizes, l);
   border-radius: 50%;
@@ -171,15 +277,15 @@
 
   &:hover {
     transform: translateY(-2px);
-    background: color(light, hover);
+    background: rgba(255, 255, 255, 0.3);
   }
 
   body.noche & {
-    background: color(dark, primary-dark);
+    background: rgba(15, 20, 25, 0.28);
     color: color(dark, background);
 
     &:hover {
-      background: color(dark, primary);
+      background: rgba(15, 20, 25, 0.42);
       color: color(dark, background);
     }
   }
@@ -603,9 +709,15 @@
     body.noche & {
       color: color(dark, text-muted);
     }
+  }
 
-    &:last-child {
-      font-size: map.get(vars.$font-sizes, xs);
-    }
+  &__note {
+    font-size: map.get(vars.$font-sizes, xs);
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  footer span[data-testimonial-field='date'] {
+    font-size: map.get(vars.$font-sizes, xs);
   }
 }

@@ -129,6 +129,12 @@
     }
   }
 
+  &__controls {
+    @include flex($align: center);
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
   @media (max-width: map.get(vars.$breakpoints, tablet)) {
     &__toggle {
       display: flex;
@@ -157,8 +163,19 @@
       }
     }
 
-    .mode-switch {
+    .site-nav__controls {
       margin-left: auto;
+      gap: 0.35rem;
+    }
+
+    .lang-switch__btn {
+      min-width: 28px;
+      min-height: 40px;
+      padding: 0.3rem 0.15rem;
+    }
+
+    .lang-switch__icon {
+      font-size: map.get(vars.$font-sizes, xs);
     }
   }
 }
